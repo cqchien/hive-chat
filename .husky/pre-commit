@@ -1,2 +1,3 @@
+yarn test
 yarn build:prod
 yarn lint

@@ -29,6 +29,6 @@
     "incremental": true,
     "strictNullChecks": true
   },
-  "include": ["src/**/*", "ormconfig.ts"],
+  "include": ["src/**/*", "ormconfig.ts", "test/**/*.ts"],
   "exclude": ["node_modules"]
 }
