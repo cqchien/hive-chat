@@ -13,7 +13,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { setupSwagger } from 'setup-swagger';
-import { ConfigServiceInterface } from 'shared/config/config.interface';
+import type { IConfigService } from 'shared/config/config.interface';
 
 export async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -71,7 +71,7 @@ export async function bootstrap(): Promise<void> {
 
   const configService = app
     .select(ConfigModule)
-    .get('ConfigServiceInterface') as ConfigServiceInterface;
+    .get<IConfigService>('IConfigService');
 
   /**
    * Swagger Documentation
@@ -88,9 +88,9 @@ export async function bootstrap(): Promise<void> {
   /**
    * Start the app
    */
-  const port = configService.get('PORT') || 3000;
+  const port = configService.get('PORT') ?? 3000;
   await app.listen(port);
   console.info(`Server is running on http://localhost:${port}`);
 }
 
-bootstrap();
+void bootstrap();

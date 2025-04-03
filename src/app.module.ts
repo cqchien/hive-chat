@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule as NestConfigModule} from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule as NestConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from 'shared/config/config.module';
 
-import { ConfigServiceInterface } from './shared/config/config.interface';
+import { IConfigService } from './shared/config/config.interface';
 
 @Module({
   imports: [
@@ -11,11 +11,12 @@ import { ConfigServiceInterface } from './shared/config/config.interface';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRootAsync({
+    MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigServiceInterface) =>
-        configService.databaseConfig,
-      inject: ['ConfigServiceInterface'],
+      useFactory: (configService: IConfigService) => ({
+        uri: configService.databaseConfig,
+      }),
+      inject: ['IConfigService'],
     }),
   ],
   controllers: [],

@@ -7,10 +7,10 @@ import { ConfigService } from './config.service';
   imports: [],
   providers: [
     {
-      provide: 'ConfigServiceInterface',
+      provide: 'IConfigService',
       useClass: ConfigService,
     },
   ],
-  exports: ['ConfigServiceInterface'],
+  exports: ['IConfigService'],
 })
 export class ConfigModule {}

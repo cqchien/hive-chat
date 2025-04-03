@@ -23,7 +23,7 @@ export class SerializerInterceptor<T>
     return next.handle().pipe(
       map((data: T) => {
         const ctx = context.switchToHttp();
-        const response = ctx.getResponse<Response & { statusCode: number }>();
+        const response = ctx.getResponse<{ statusCode: number }>();
 
         const statusCode = response.statusCode;
 
@@ -32,7 +32,7 @@ export class SerializerInterceptor<T>
         return new ResponseDto<T>(data, meta);
       }),
       catchError((error) => {
-        throw mapToHttpException(error);
+        throw mapToHttpException(error as Error);
       }),
     );
   }

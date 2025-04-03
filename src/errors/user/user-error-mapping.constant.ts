@@ -1,8 +1,5 @@
-import {
-  ConflictException,
-  HttpException,
-  NotFoundException,
-} from '@nestjs/common';
+import type { HttpException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 
 import { UserConflictError } from './user-conflict.error';
 import { UserNotFoundError } from './user-not-found.error';

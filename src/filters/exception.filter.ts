@@ -10,7 +10,7 @@ import { CONSTRAINT_ERRORS } from './constraint-errors';
 
 @Catch()
 export class SystemExceptionFilter implements ExceptionFilter {
-  private readonly _logger = new Logger(SystemExceptionFilter.name);
+  private readonly logger = new Logger(SystemExceptionFilter.name);
 
   constructor(public reflector: Reflector) {}
 
@@ -31,10 +31,10 @@ export class SystemExceptionFilter implements ExceptionFilter {
 
       message = r.message;
       error = r.error;
-      this._validationFilter(message);
+      this.validationFilter(message);
     }
 
-    this._logger.error(
+    this.logger.error(
       error || message,
       process.env.NODE_ENV !== 'production' && exception.stack,
     );
@@ -54,12 +54,12 @@ export class SystemExceptionFilter implements ExceptionFilter {
     response.status(statusCode).json(new ResponseDto(null, metaResponseDto));
   }
 
-  private _validationFilter(validationErrors: ValidationError[]): void {
+  private validationFilter(validationErrors: ValidationError[]): void {
     for (const validationError of validationErrors) {
       const children = validationError.children;
 
       if (children && !isEmpty(children)) {
-        this._validationFilter(children);
+        this.validationFilter(children);
 
         return;
       }
@@ -81,8 +81,8 @@ export class SystemExceptionFilter implements ExceptionFilter {
       }
     }
 
-    this._logger.error(
-      `Fields: ${validationErrors.map((e) => e.property)}, Errors: ${Object.values(validationErrors.map((e) => e.constraints))}`,
+    this.logger.error(
+      `Fields: ${validationErrors.map((e) => e.property)}, Errors: ${validationErrors.flatMap((e) => Object.values(e.constraints ?? {})).join(', ')}`,
     );
   }
 }

@@ -1,5 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*", "*.{ts,js,mts}", "test/**/*", "ormconfig.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "./eslint.config.mjs"
+  ],
+  "exclude": ["node_modules/**/*", "dist/**/*"]
 }

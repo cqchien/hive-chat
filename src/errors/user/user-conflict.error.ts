@@ -1,4 +1,4 @@
-import { ERROR_USER_CONFLICT } from "./user-error.constant";
+import { ERROR_USER_CONFLICT } from './user-error.constant';
 
 export class UserConflictError extends Error {
   constructor(message: string) {

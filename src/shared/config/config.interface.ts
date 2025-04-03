@@ -1,6 +1,4 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-
-export interface ConfigServiceInterface {
-  databaseConfig: TypeOrmModuleOptions;
+export interface IConfigService {
+  databaseConfig: string;
   get(key: string): string | undefined;
 }

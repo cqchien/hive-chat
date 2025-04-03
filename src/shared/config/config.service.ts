@@ -1,36 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService as NestConfigService } from '@nestjs/config';
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import path from 'path';
-import { SnakeNamingStrategy } from 'snake-naming.strategy';
 
-import { ConfigServiceInterface } from './config.interface';
+import { IConfigService } from './config.interface';
 
 @Injectable()
-export class ConfigService implements ConfigServiceInterface {
+export class ConfigService implements IConfigService {
   constructor(private readonly configService: NestConfigService) {}
 
-  get databaseConfig(): TypeOrmModuleOptions {
-    const entities = [
-      path.join(__dirname, `../../../modules/**/*.entity{.ts,.js}`),
-    ];
-    const migrations = [
-      path.join(__dirname, `../../../database/migrations/*{.ts,.js}`),
-    ];
-
-    return {
-      entities,
-      migrations,
-      type: 'mongodb',
-      host: this.getString('DB_HOST'),
-      port: this.getNumber('DB_PORT'),
-      username: this.getString('DB_USERNAME'),
-      password: this.getString('DB_PASSWORD'),
-      database: this.getString('DB_DATABASE'),
-      migrationsRun: true,
-      logging: this.getBoolean('DB_LOGGING'),
-      namingStrategy: new SnakeNamingStrategy(),
-    };
+  get databaseConfig(): string {
+    return (
+      `mongodb://${this.getString('DB_USERNAME')}:` +
+      `${this.getString('DB_PASSWORD')}@${this.getString('DB_HOST')}:` +
+      `${this.getNumber('DB_PORT')}/${this.get('DB_NAME')}`
+    );
   }
 
   private getNumber(key: string): number {
@@ -40,16 +22,6 @@ export class ConfigService implements ConfigServiceInterface {
       return Number(value);
     } catch {
       throw new Error(`${key} environment variable is not a number`);
-    }
-  }
-
-  private getBoolean(key: string): boolean {
-    const value = this.get(key);
-
-    try {
-      return Boolean(value);
-    } catch {
-      throw new Error(`${key} env var is not a boolean`);
     }
   }
 

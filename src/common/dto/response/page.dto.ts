@@ -1,8 +1,10 @@
-import { PageMetaDto } from './page-meta.dto';
+import type { PageMetaDto } from './page-meta.dto';
 
 export class PageDto<T> {
   readonly data: T[];
+
   readonly meta: PageMetaDto;
+
   readonly extra?: Record<string, string | boolean | number>;
 
   constructor(

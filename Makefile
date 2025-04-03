@@ -40,7 +40,6 @@ build:
 	yarn build
 
 bootstrap:
-	chmod +x ./init-database.sh
 	cp .env.example .env
 	yarn
 

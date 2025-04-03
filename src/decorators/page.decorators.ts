@@ -1,15 +1,12 @@
-import { applyDecorators,Type } from '@nestjs/common';
-import {
-  ApiExtraModels,
-  ApiOkResponse,
-  ApiResponseOptions,
-  getSchemaPath,
-} from '@nestjs/swagger';
+import type { Type } from '@nestjs/common';
+import { applyDecorators } from '@nestjs/common';
+import type { ApiResponseOptions } from '@nestjs/swagger';
+import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 import { PageDto } from 'common/dto/response/page.dto';
 import { PageMetaDto } from 'common/dto/response/page-meta.dto';
 
-export function ApiPageResponse<T extends Type>(options: {
-  type: T;
+export function ApiPageResponse(options: {
+  type: Type;
   description?: string;
 }): MethodDecorator {
   return applyDecorators(

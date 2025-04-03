@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
+import type { ApiPropertyOptions } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
@@ -20,7 +21,7 @@ import {
   NotEquals,
   ValidateNested,
 } from 'class-validator';
-import { Constructor } from 'types';
+import type { Constructor } from 'types';
 
 import {
   ToArray,
@@ -127,7 +128,7 @@ export function StringField(
     );
   }
 
-  const minLength = options.minLength || 1;
+  const minLength = options.minLength ?? 1;
 
   decorators.push(MinLength(minLength, { each: options.each }));
 
@@ -219,8 +220,8 @@ export function TmpKeyFieldOptional(
   return applyDecorators(IsUndefinable(), TmpKeyField({ ...options }));
 }
 
-export function EnumField<TEnum extends object>(
-  getEnum: () => TEnum,
+export function EnumField(
+  getEnum: () => object,
   options: IEnumFieldOptions = {},
 ): PropertyDecorator {
   const enumValue = getEnum();
@@ -239,8 +240,8 @@ export function EnumField<TEnum extends object>(
   return applyDecorators(...decorators);
 }
 
-export function ClassField<TClass extends Constructor>(
-  getClass: () => TClass,
+export function ClassField(
+  getClass: () => Constructor,
   options: ApiPropertyOptions & IClassFieldOptions = {},
 ): PropertyDecorator {
   const classValue = getClass();
@@ -276,15 +277,15 @@ export function ClassField<TClass extends Constructor>(
   return applyDecorators(...decorators);
 }
 
-export function EnumFieldOptional<TEnum extends object>(
-  getEnum: () => TEnum,
+export function EnumFieldOptional(
+  getEnum: () => object,
   options: IEnumFieldOptions = {},
 ): PropertyDecorator {
   return applyDecorators(IsUndefinable(), EnumField(getEnum, { ...options }));
 }
 
-export function ClassFieldOptional<TClass extends Constructor>(
-  getClass: () => TClass,
+export function ClassFieldOptional(
+  getClass: () => Constructor,
   options: IClassFieldOptions = {},
 ): PropertyDecorator {
   return applyDecorators(IsUndefinable(), ClassField(getClass, { ...options }));

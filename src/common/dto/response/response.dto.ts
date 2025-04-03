@@ -1,6 +1,8 @@
 export class MetaResponseDto {
   statusCode: number;
+
   message?: string | null;
+
   error?: string | null;
 
   constructor(statusCode: number, message?: string, error?: string) {
@@ -12,6 +14,7 @@ export class MetaResponseDto {
 
 export class ResponseDto<T> {
   response: T | null;
+
   meta: MetaResponseDto;
 
   constructor(data: T | null, meta: MetaResponseDto) {

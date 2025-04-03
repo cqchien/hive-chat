@@ -1,4 +1,4 @@
- 
+/* eslint-disable sonarjs/function-return-type */
 import { Transform } from 'class-transformer';
 import { castArray, isArray, isNil, map, trim } from 'lodash';
 
@@ -17,13 +17,10 @@ export function Trim(): PropertyDecorator {
     const value = params.value as string[] | string;
 
     if (isArray(value)) {
-      return map(
-        value,
-        (v): string => trim(v).replaceAll(/\s\s+/g, ' ') as string,
-      );
+      return map(value, (v): string => trim(v).replaceAll(/\s\s+/g, ' '));
     }
 
-    return trim(value).replaceAll(/\s\s+/g, ' ') as string;
+    return trim(value).replaceAll(/\s\s+/g, ' ');
   });
 }
 
