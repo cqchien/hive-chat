@@ -4,16 +4,17 @@ import {
   UnprocessableEntityException,
   ValidationPipe,
 } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from 'app.module';
 import compression from 'compression';
+import { SystemExceptionFilter } from 'filters/exception.filter';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { setupSwagger } from 'setup-swagger';
 import type { IConfigService } from 'shared/config/config.interface';
+import { ConfigModule } from 'shared/config/config.module';
 
 export async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -36,8 +37,6 @@ export async function bootstrap(): Promise<void> {
   app.use(helmet());
   // Use morgan to log HTTP requests
   app.use(morgan('dev'));
-  // Use logger middleware to log all incoming requests
-  app.useLogger(app.get('Logger'));
   // Use compression to compress the response bodies
   app.use(compression());
   // Use versioning to version the API
@@ -50,7 +49,7 @@ export async function bootstrap(): Promise<void> {
   // Metadata includes the route handlers, the route parameters, the request body, and the response body
   const reflector = app.get(Reflector);
   // Use global filter to catch exceptions thrown by the application
-  app.useGlobalFilters();
+  app.useGlobalFilters(new SystemExceptionFilter(reflector));
 
   // Use global interceptors to transform the response
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));

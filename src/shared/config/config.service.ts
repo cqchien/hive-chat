@@ -11,7 +11,7 @@ export class ConfigService implements IConfigService {
     return (
       `mongodb://${this.getString('DB_USERNAME')}:` +
       `${this.getString('DB_PASSWORD')}@${this.getString('DB_HOST')}:` +
-      `${this.getNumber('DB_PORT')}/${this.get('DB_NAME')}`
+      `${this.getNumber('DB_PORT')}/${this.get('DB_DATABASE')}?authSource=admin`
     );
   }
 
