@@ -11,6 +11,7 @@ import { AppModule } from 'app.module';
 import compression from 'compression';
 import { SystemExceptionFilter } from 'filters/exception.filter';
 import helmet from 'helmet';
+import { SerializerInterceptor } from 'interceptors/response.interceptors';
 import morgan from 'morgan';
 import { setupSwagger } from 'setup-swagger';
 import type { IConfigService } from 'shared/config/config.interface';
@@ -52,7 +53,10 @@ export async function bootstrap(): Promise<void> {
   app.useGlobalFilters(new SystemExceptionFilter(reflector));
 
   // Use global interceptors to transform the response
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
+  app.useGlobalInterceptors(
+    new ClassSerializerInterceptor(reflector),
+    new SerializerInterceptor(),
+  );
 
   /**
    * Global Pipes
