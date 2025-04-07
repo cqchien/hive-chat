@@ -22,6 +22,8 @@ export class SystemExceptionFilter implements ExceptionFilter {
     let message: string | ValidationError[] = exception.message;
     let error = '';
 
+    let validationFilterMessage = '';
+
     if (exception instanceof HttpException) {
       statusCode = exception.getStatus();
       const r = exception.getResponse() as {
@@ -31,7 +33,7 @@ export class SystemExceptionFilter implements ExceptionFilter {
 
       message = r.message;
       error = r.error;
-      this.validationFilter(message);
+      validationFilterMessage = this.validationFilter(message);
     }
 
     this.logger.error(
@@ -41,7 +43,7 @@ export class SystemExceptionFilter implements ExceptionFilter {
 
     const metaResponseDto = new MetaResponseDto(
       statusCode,
-      error || message.toString(),
+      validationFilterMessage || error || message.toString(),
       findKey(
         CONSTRAINT_ERRORS,
         (value: string | string[]) =>
@@ -54,14 +56,12 @@ export class SystemExceptionFilter implements ExceptionFilter {
     response.status(statusCode).json(new ResponseDto(null, metaResponseDto));
   }
 
-  private validationFilter(validationErrors: ValidationError[]): void {
+  private validationFilter(validationErrors: ValidationError[]): string {
     for (const validationError of validationErrors) {
       const children = validationError.children;
 
       if (children && !isEmpty(children)) {
-        this.validationFilter(children);
-
-        return;
+        return this.validationFilter(children);
       }
 
       delete validationError.children;
@@ -69,7 +69,7 @@ export class SystemExceptionFilter implements ExceptionFilter {
       const constraints = validationError.constraints;
 
       if (!constraints) {
-        return;
+        return validationError.property;
       }
 
       for (const [constraintKey, constraint] of Object.entries(constraints)) {
@@ -81,8 +81,14 @@ export class SystemExceptionFilter implements ExceptionFilter {
       }
     }
 
-    this.logger.error(
-      `Fields: ${validationErrors.map((e) => e.property)}, Errors: ${validationErrors.flatMap((e) => Object.values(e.constraints ?? {})).join(', ')}`,
-    );
+    const fields = validationErrors.map((e) => e.property);
+    const errors = validationErrors
+      .flatMap((e) => Object.values(e.constraints ?? {}))
+      .join(', ');
+    const message = `Fields: ${fields}, Errors: ${errors}`;
+
+    this.logger.error(message);
+
+    return message;
   }
 }
