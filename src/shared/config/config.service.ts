@@ -15,6 +15,18 @@ export class ConfigService implements IConfigService {
     );
   }
 
+  get tokenConfig(): {
+    secret: string;
+    accessTokenExpiration: number;
+    refreshTokenExpiration: number;
+  } {
+    return {
+      secret: this.getString('JWT_SECRET'),
+      accessTokenExpiration: this.getNumber('JWT_ACCESS_TOKEN_EXPIRATION'),
+      refreshTokenExpiration: this.getNumber('JWT_REFRESH_TOKEN_EXPIRATION'),
+    };
+  }
+
   private getNumber(key: string): number {
     const value = this.get(key);
 

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule as NestConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from 'module/auth/auth.module';
 import { UserModule } from 'module/user/user.module';
 import { ConfigModule } from 'shared/config/config.module';
 
@@ -9,6 +10,7 @@ import { IConfigService } from './shared/config/config.interface';
 @Module({
   imports: [
     UserModule,
+    AuthModule,
     NestConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',

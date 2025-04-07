@@ -358,13 +358,21 @@ export function URLFieldOptional(
   return applyDecorators(IsUndefinable(), URLField({ ...options }));
 }
 
-export function DateField(options: IFieldOptions = {}): PropertyDecorator {
+export function DateField(
+  options: IFieldOptions = {
+    swagger: true,
+  },
+): PropertyDecorator {
   const decorators = [Type(() => Date), IsDate()];
 
   if (options.nullable) {
     decorators.push(IsNullable());
   } else {
     decorators.push(NotEquals(null));
+  }
+
+  if (options.swagger !== false) {
+    decorators.push(ApiProperty({ type: Date, ...options }));
   }
 
   return applyDecorators(...decorators);
