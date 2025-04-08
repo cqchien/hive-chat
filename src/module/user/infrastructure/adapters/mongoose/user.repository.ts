@@ -17,6 +17,12 @@ export class UserRepository implements IUserRepository {
     return userDocument ? UserRepository.toDomain(userDocument) : null;
   }
 
+  async findById(id: string): Promise<User | null> {
+    const userDocument = await this.userModel.findById(id).exec();
+
+    return userDocument ? UserRepository.toDomain(userDocument) : null;
+  }
+
   async save(user: User): Promise<User> {
     const userDocument = new this.userModel(user);
 

@@ -22,7 +22,11 @@ export class UserResponseDto {
   @DateField()
   updatedAt!: Date;
 
-  constructor(partial: Partial<User>) {
-    Object.assign(this, partial);
+  constructor(partial: User) {
+    this.email = partial.email;
+    this.username = partial.username;
+    this.avatar = partial.avatar;
+    this.createdAt = partial.createdAt;
+    this.updatedAt = partial.updatedAt;
   }
 }

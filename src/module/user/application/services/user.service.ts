@@ -18,6 +18,10 @@ export class UserService implements IUserService {
     return this.userRepository.findByCondition(condition);
   }
 
+  async findById(id: string): Promise<User | null> {
+    return this.userRepository.findById(id);
+  }
+
   async save(user: CreateUserDto): Promise<User> {
     const existingUser = await this.userRepository.findByCondition({
       email: user.email,

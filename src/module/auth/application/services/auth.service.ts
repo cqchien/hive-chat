@@ -5,7 +5,8 @@ import { IUserService } from 'module/user/application/ports/user-service.port';
 
 import { LoginDto } from '../dtos/login.dto';
 import { TokenResponseDto } from '../dtos/token-response.dto';
-import { IAuthService, IJwtService } from '../ports/auth-service.port';
+import { IAuthService } from '../ports/auth-service.port';
+import { IJwtService } from '../ports/jwt-service.port';
 
 @Injectable()
 export class AuthService implements IAuthService {

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService as NestJwtService } from '@nestjs/jwt';
 import { IConfigService } from 'shared/config/config.interface';
 
-import { IJwtService } from '../ports/auth-service.port';
+import { IJwtService } from '../ports/jwt-service.port';
 
 @Injectable()
 export class JwtService implements IJwtService {
