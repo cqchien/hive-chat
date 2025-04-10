@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthGuard } from 'guards/auth.guards';
-import type { User } from 'module/user/domain/entities/user.entity';
+import type { User } from 'modules/user/domain/entities/user.entity';
 
 export function AuthUser() {
   return createParamDecorator((_data: unknown, context: ExecutionContext) => {

@@ -1,6 +1,6 @@
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from 'module/user/domain/entities/user.entity';
-import { IUserRepository } from 'module/user/domain/ports/user-repository.port';
+import { User } from 'modules/user/domain/entities/user.entity';
+import { IUserRepository } from 'modules/user/domain/ports/user-repository.port';
 import { Document, Model, Types } from 'mongoose';
 
 import { UserSchema } from '../../schemas/user.schema';

@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UserConflictError } from 'errors/user/user-conflict.error';
-import { IUserService } from 'module/user/application/ports/user-service.port';
-import { User } from 'module/user/domain/entities/user.entity';
-import { IUserRepository } from 'module/user/domain/ports/user-repository.port';
+import { IUserService } from 'modules/user/application/ports/user-service.port';
+import { User } from 'modules/user/domain/entities/user.entity';
+import { IUserRepository } from 'modules/user/domain/ports/user-repository.port';
 
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserMapper } from '../mappers/user.mapper';

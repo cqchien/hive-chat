@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { compareHash } from 'common/utils/hash.utils';
 import { AuthInvalidCredentialError } from 'errors/auth/invalid-credential.error';
-import { IUserService } from 'module/user/application/ports/user-service.port';
+import { IUserService } from 'modules/user/application/ports/user-service.port';
 
 import { LoginDto } from '../dtos/login.dto';
 import { TokenResponseDto } from '../dtos/token-response.dto';

@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { AuthInvalidCredentialError } from 'errors/auth/invalid-credential.error';
-import { IUserService } from 'module/user/application/ports/user-service.port';
-import { User } from 'module/user/domain/entities/user.entity';
+import { IUserService } from 'modules/user/application/ports/user-service.port';
+import { User } from 'modules/user/domain/entities/user.entity';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IConfigService } from 'shared/config/config.interface';
 

@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { LoginDto } from 'module/auth/application/dtos/login.dto';
-import { TokenResponseDto } from 'module/auth/application/dtos/token-response.dto';
-import { IAuthService } from 'module/auth/application/ports/auth-service.port';
+import { LoginDto } from 'modules/auth/application/dtos/login.dto';
+import { TokenResponseDto } from 'modules/auth/application/dtos/token-response.dto';
+import { IAuthService } from 'modules/auth/application/ports/auth-service.port';
 
 @Controller('auth')
 @ApiTags('Auth')

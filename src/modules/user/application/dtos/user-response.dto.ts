@@ -4,7 +4,7 @@ import {
   StringField,
   StringFieldOptional,
 } from 'decorators/field.decorators';
-import { User } from 'module/user/domain/entities/user.entity';
+import { User } from 'modules/user/domain/entities/user.entity';
 
 export class UserResponseDto {
   @EmailField()

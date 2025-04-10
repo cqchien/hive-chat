@@ -1,4 +1,4 @@
-import { User } from 'module/user/domain/entities/user.entity';
+import { User } from 'modules/user/domain/entities/user.entity';
 
 import type { CreateUserDto } from '../dtos/create-user.dto';
 

@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, AuthUser } from 'decorators/auth.decorators';
-import { UserResponseDto } from 'module/user/application/dtos/user-response.dto';
-import { User } from 'module/user/domain/entities/user.entity';
+import { UserResponseDto } from 'modules/user/application/dtos/user-response.dto';
+import { User } from 'modules/user/domain/entities/user.entity';
 
 @Controller('user')
 @ApiTags('User')
