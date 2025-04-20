@@ -4,14 +4,14 @@ import {
   StringField,
   StringFieldOptional,
 } from 'decorators/field.decorators';
-import { User } from 'modules/user/domain/entities/user.entity';
+import { UserEntity } from 'modules/user/domain/entities/user.entity';
 
 export class UserResponseDto {
   @EmailField()
   email!: string;
 
   @StringField()
-  username!: string;
+  displayName!: string;
 
   @StringFieldOptional()
   avatar?: string;
@@ -22,9 +22,9 @@ export class UserResponseDto {
   @DateField()
   updatedAt!: Date;
 
-  constructor(partial: User) {
+  constructor(partial: UserEntity) {
     this.email = partial.email;
-    this.username = partial.username;
+    this.displayName = partial.displayName;
     this.avatar = partial.avatar;
     this.createdAt = partial.createdAt;
     this.updatedAt = partial.updatedAt;

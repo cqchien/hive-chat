@@ -5,14 +5,14 @@ import { Prop, Schema } from '@nestjs/mongoose';
   timestamps: true,
 })
 export class UserSchema {
-  @Prop({ type: String, required: true, unique: true })
+  @Prop({ type: String, required: true, unique: true, index: true })
   email!: string;
 
   @Prop({ type: String, required: true })
   password!: string;
 
   @Prop({ type: String, required: true })
-  username!: string;
+  displayName!: string;
 
   @Prop({ type: String, required: false })
   avatar!: string;
@@ -23,5 +23,3 @@ export class UserSchema {
   @Prop({ type: Date, default: Date.now })
   updatedAt!: Date;
 }
-
-export type UserDocument = UserSchema & Document;

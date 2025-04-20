@@ -12,5 +12,5 @@ export class CreateUserDto {
   password!: string;
 
   @StringField()
-  username!: string;
+  displayName!: string;
 }

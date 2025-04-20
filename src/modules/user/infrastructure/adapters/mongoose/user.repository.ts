@@ -1,5 +1,5 @@
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from 'modules/user/domain/entities/user.entity';
+import { UserEntity } from 'modules/user/domain/entities/user.entity';
 import { IUserRepository } from 'modules/user/domain/ports/user-repository.port';
 import { Document, Model, Types } from 'mongoose';
 
@@ -11,19 +11,21 @@ export class UserRepository implements IUserRepository {
     private readonly userModel: Model<UserSchema>,
   ) {}
 
-  async findByCondition(condition: Partial<User>): Promise<User | null> {
+  async findByCondition(
+    condition: Partial<UserEntity>,
+  ): Promise<UserEntity | null> {
     const userDocument = await this.userModel.findOne(condition).exec();
 
     return userDocument ? UserRepository.toDomain(userDocument) : null;
   }
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: string): Promise<UserEntity | null> {
     const userDocument = await this.userModel.findById(id).exec();
 
     return userDocument ? UserRepository.toDomain(userDocument) : null;
   }
 
-  async save(user: User): Promise<User> {
+  async save(user: UserEntity): Promise<UserEntity> {
     const userDocument = new this.userModel(user);
 
     await userDocument.save();
@@ -31,7 +33,7 @@ export class UserRepository implements IUserRepository {
     return UserRepository.toDomain(userDocument);
   }
 
-  async update(user: User): Promise<User> {
+  async update(user: UserEntity): Promise<UserEntity> {
     const userDocument = await this.userModel.findByIdAndUpdate(user.id, user, {
       new: true,
     });
@@ -43,15 +45,25 @@ export class UserRepository implements IUserRepository {
     return UserRepository.toDomain(userDocument);
   }
 
+  async getUsersByIds(ids: string[]): Promise<UserEntity[]> {
+    const userDocuments = await this.userModel
+      .find({ _id: { $in: ids.map((id) => new Types.ObjectId(id)) } })
+      .exec();
+
+    return userDocuments.map((userDocument) =>
+      UserRepository.toDomain(userDocument),
+    );
+  }
+
   static toDomain(
     userDocument: Document<unknown, object, UserSchema> &
       UserSchema & {
         _id: Types.ObjectId;
       },
-  ): User {
-    return new User({
+  ): UserEntity {
+    return new UserEntity({
       id: userDocument._id.toString(),
-      username: userDocument.username,
+      displayName: userDocument.displayName,
       password: userDocument.password,
       email: userDocument.email,
       createdAt: userDocument.createdAt,

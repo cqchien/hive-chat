@@ -1,7 +1,7 @@
-export class User {
+export class UserEntity {
   id!: string;
 
-  username!: string;
+  displayName!: string;
 
   password!: string;
 
@@ -13,7 +13,7 @@ export class User {
 
   updatedAt!: Date;
 
-  constructor(props: Partial<User>) {
+  constructor(props: Partial<UserEntity>) {
     Object.assign(this, props);
   }
 }
