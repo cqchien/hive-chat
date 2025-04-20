@@ -12,5 +12,5 @@ export class RegisterDto {
   password!: string;
 
   @StringField()
-  username!: string;
+  displayName!: string;
 }
