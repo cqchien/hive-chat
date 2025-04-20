@@ -7,17 +7,20 @@ A scalable real-time chat application built with Hexagonal Architecture using Ne
 This application implements Hexagonal Architecture (Ports and Adapters) pattern with three main layers:
 
 ### Domain Layer
+
 - Contains business logic and rules
 - Defines interfaces (ports) for external dependencies
 - Pure TypeScript with no external dependencies
 - Houses core entities and value objects
 
 ### Application Layer
+
 - Implements use cases using domain entities
 - Orchestrates flow between domain and infrastructure
 - Depends only on domain interfaces
 
 ### Infrastructure Layer
+
 - Implements adapters for external services
 - Contains concrete implementations of ports
 - Handles framework-specific code (NestJS, Mongoose, etc.)
@@ -30,8 +33,7 @@ src/
 │   │   │   ├── entities/
 │   │   │   │   └── user.entity.ts
 │   │   │   ├── ports/
-│   │   │   │   ├── user.repository.port.ts
-│   │   │   │   └── user.service.port.ts
+│   │   │   │   ├── user-repository.port.ts
 │   │   │   └── value-objects/
 │   │   │       └── email.value-object.ts
 │   │   ├── application/
@@ -39,6 +41,8 @@ src/
 │   │   │   │   └── user.dto.ts
 │   │   │   └── services/
 │   │   │       └── user.service.ts
+|   |   |   └── ports/
+│   │   │       └── user-service.port.ts
 │   │   ├── infrastructure/
 │   │   │   ├── adapters/
 │   │   │   │   ├── mongoose/
@@ -69,6 +73,46 @@ src/
 └── main.ts
 
 ```
+
+# Hexagonal Architecture
+
+## Architecture Layers
+
+### Domain Layer (domain/)
+
+- Contains core business logic
+- Independent of infrastructure
+- Includes:
+  - entities/: Domain models (UserEntity)
+  - ports/: Interfaces for repositories
+  - value-objects/: Immutable, validated domain concepts
+
+### Application Layer (application/)
+
+- Contains application-specific logic
+- Coordinates domain entities
+- Includes:
+  - dtos/: Data Transfer Objects
+  - services/: Application services that use domain entities
+  - ports/: Interfaces for services
+
+### Infrastructure Layer (infrastructure/)
+
+- Implements concrete adapters
+- Contains technology-specific implementations
+- Includes:
+  - adapters/:
+    - mongoose/: Database-specific repository
+    - http/: REST API controllers
+  - schemas/: Database schemas (e.g., Mongoose schema)
+
+### Key Principles
+
+- Domain layer is independent
+- Infrastructure adapts to domain, not vice versa
+- Clear separation of concerns
+- Dependency rule: Inner layers (domain) don't depend on outer layers
+
 ## Tech Stack
 
 - **Backend Framework**: NestJS
@@ -96,16 +140,19 @@ src/
 
 1. Clone the repository:
 2. Install dependencies:
+
 ```bash
 make bootstrap
 ```
 
 3. Start the development environment:
+
 ```bash
 make up
 ```
 
 4. Run the application:
+
 ```bash
 yarn start:dev
 ```
