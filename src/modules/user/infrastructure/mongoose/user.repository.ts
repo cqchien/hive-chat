@@ -3,7 +3,7 @@ import { UserEntity } from 'modules/user/domain/entities/user.entity';
 import { IUserRepository } from 'modules/user/domain/ports/user-repository.port';
 import { Document, Model, Types } from 'mongoose';
 
-import { UserSchema } from '../../schemas/user.schema';
+import { UserSchema } from '../schemas/user.schema';
 
 export class UserRepository implements IUserRepository {
   constructor(

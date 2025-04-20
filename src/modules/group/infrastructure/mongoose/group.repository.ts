@@ -4,7 +4,7 @@ import { GroupEntity } from 'modules/group/domain/entities/group.entity';
 import { IGroupRepository } from 'modules/group/domain/ports/group-repository.port';
 import { Document, Model, Types } from 'mongoose';
 
-import { GroupSchema } from '../../schemas/group.schema';
+import { GroupSchema } from '../schemas/group.schema';
 
 @Injectable()
 export class GroupRepository implements IGroupRepository {

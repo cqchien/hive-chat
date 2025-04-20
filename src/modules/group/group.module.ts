@@ -3,8 +3,8 @@ import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
 import { UserModule } from 'modules/user/user.module';
 
 import { GroupService } from './application/services/group.service';
-import { GroupController } from './infrastructure/adapters/http/group.controller';
-import { GroupRepository } from './infrastructure/adapters/mongoose/group.repository';
+import { GroupController } from './infrastructure/http/group.controller';
+import { GroupRepository } from './infrastructure/mongoose/group.repository';
 import { GroupSchema } from './infrastructure/schemas/group.schema';
 
 @Module({

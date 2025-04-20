@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
 
 import { UserService } from './application/services/user.service';
-import { UserController } from './infrastructure/adapters/http/user.controller';
-import { UserRepository } from './infrastructure/adapters/mongoose/user.repository';
+import { UserController } from './infrastructure/http/user.controller';
+import { UserRepository } from './infrastructure/mongoose/user.repository';
 import { UserSchema } from './infrastructure/schemas/user.schema';
 
 @Module({
