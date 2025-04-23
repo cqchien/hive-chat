@@ -2,7 +2,10 @@ import { Prop, Schema } from '@nestjs/mongoose';
 import { GroupType } from 'modules/group/domain/constants/group.enum';
 import mongoose from 'mongoose';
 
-import { GroupMemberSchema, groupMemberSchema } from './group-member.schema';
+import {
+  groupMemberModelSchema,
+  GroupMemberSchema,
+} from './group-member.schema';
 
 @Schema({
   collection: 'groups',
@@ -25,7 +28,7 @@ export class GroupSchema {
   pinnedMessages?: string[];
 
   @Prop({
-    type: [groupMemberSchema],
+    type: [groupMemberModelSchema],
     required: false,
     default: [],
   })

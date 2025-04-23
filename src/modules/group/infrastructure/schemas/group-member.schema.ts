@@ -42,5 +42,5 @@ export class GroupMemberSchema {
   bannedUntil?: Date;
 }
 
-export const groupMemberSchema =
+export const groupMemberModelSchema =
   SchemaFactory.createForClass(GroupMemberSchema);
