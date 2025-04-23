@@ -422,6 +422,7 @@ export default tseslint.config(
       'node_modules',
       'dist',
       'migrations',
+      'migrate-mongo-config.js',
       '**/*.mjs',
       '**/*.min.js',
       '**/*.d.ts',
