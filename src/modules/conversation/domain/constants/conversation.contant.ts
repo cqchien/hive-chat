@@ -1,0 +1,1 @@
+export const MIN_PARTICIPANTS_FOR_GROUP_CHAT = 3;

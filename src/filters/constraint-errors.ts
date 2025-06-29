@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { AUTH_ERRORS } from 'errors/auth/auth-error.constant';
-import { GROUP_ERRORS } from 'errors/group/group-error.constant';
+import { CONVERSATION_ERRORS } from 'errors/conversation/conversation-error.constant';
 import { USER_ERRORS } from 'errors/user/user-error.constant';
 
 export const CONSTRAINT_ERRORS: Record<string, string | string[]> = {
@@ -10,5 +10,5 @@ export const CONSTRAINT_ERRORS: Record<string, string | string[]> = {
 
   ...USER_ERRORS,
   ...AUTH_ERRORS,
-  ...GROUP_ERRORS,
+  ...CONVERSATION_ERRORS,
 };

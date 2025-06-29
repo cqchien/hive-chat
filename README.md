@@ -53,7 +53,7 @@ src/
 │   │   │       └── user.schema.ts
 │   │   └── users.module.ts
 │   │
-│   ├── groups/
+│   ├── conversations/
 │   │   └── [Similar structure as users]
 │   │
 │   ├── messages/

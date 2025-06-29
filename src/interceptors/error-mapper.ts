@@ -1,6 +1,6 @@
 import type { HttpException } from '@nestjs/common';
 import { AUTH_ERROR_MAPPING_EXCEPTION } from 'errors/auth/auth-error-mapping.constant';
-import { GROUP_ERROR_MAPPING_EXCEPTION } from 'errors/group/group-error-mapping.constant';
+import { CONVERSATION_ERROR_MAPPING_EXCEPTION } from 'errors/conversation/conversation-error-mapping.constant';
 import { USER_ERROR_MAPPING_EXCEPTION } from 'errors/user/user-error-mapping.constant';
 
 const ERROR_MAPPINGS = new Map<
@@ -9,7 +9,7 @@ const ERROR_MAPPINGS = new Map<
 >([
   ...USER_ERROR_MAPPING_EXCEPTION,
   ...AUTH_ERROR_MAPPING_EXCEPTION,
-  ...GROUP_ERROR_MAPPING_EXCEPTION,
+  ...CONVERSATION_ERROR_MAPPING_EXCEPTION,
 ]);
 
 export function mapToHttpException(error: Error): HttpException {
